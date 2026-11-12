@@ -1,0 +1,4 @@
+New-Item ml_model\results\accuracy.txt -ItemType File
+New-Item ml_model\results\classification_report.txt -ItemType File
+
+New-Item database\schema.sql -ItemType File

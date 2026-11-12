@@ -1,0 +1,538 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 17
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| clg                |
+| college            |
+| example            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| school             |
+| suma               |
+| sys                |
++--------------------+
+9 rows in set (0.01 sec)
+
+mysql> use sys;
+Database changed
+mysql> CREATE TABLE departments ( dept_id INT PRIMARY KEY, dept_name VARCHAR(50), location VARCHAR(50) );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into departments values(11,"HR","hyderabad");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into departments values(12,"manager","vizag");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into departments values(13,"finance","rajamundry");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into departments values(14,"testing","vijayawada");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into departments values(15,"sales","kakinada");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into departments values(16,"designing","gujarat");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from departments;
++---------+-----------+------------+
+| dept_id | dept_name | location   |
++---------+-----------+------------+
+|      11 | HR        | hyderabad  |
+|      12 | manager   | vizag      |
+|      13 | finance   | rajamundry |
+|      14 | testing   | vijayawada |
+|      15 | sales     | kakinada   |
+|      16 | designing | gujarat    |
++---------+-----------+------------+
+6 rows in set (0.00 sec)
+
+mysql> CREATE TABLE employees ( emp_id INT PRIMARY KEY, emp_name VARCHAR(50), gender VARCHAR(10), salary DECIMAL(10,2), hire_date DATE, dept_id INT );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> INSERT INTO employees VALUES (101,'Rahul','Male',45000,'2023-01-10',1), (102,'Priya','Female',60000,'2022-03-15',2), (103,'Amit','Male',55000,'2021-05-20',2), (104,'Sneha','Female',50000,'2020-08-11',3), (105,'Kiran','Male',70000,'2019-09-18',4), (106,'Anjali','Female',48000,'2022-11-25',NULL), (107,'Ravi','Male',40000,'2024-01-05',2), (108,'Pooja','Female',65000,'2021-12-12',5), (109,'Arjun','Male',52000,'2023-04-08',NULL), (110,'Deepika','Female',58000,'2022-06-14',3);
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select *from employees;
++--------+----------+--------+----------+------------+---------+
+| emp_id | emp_name | gender | salary   | hire_date  | dept_id |
++--------+----------+--------+----------+------------+---------+
+|    101 | Rahul    | Male   | 45000.00 | 2023-01-10 |       1 |
+|    102 | Priya    | Female | 60000.00 | 2022-03-15 |       2 |
+|    103 | Amit     | Male   | 55000.00 | 2021-05-20 |       2 |
+|    104 | Sneha    | Female | 50000.00 | 2020-08-11 |       3 |
+|    105 | Kiran    | Male   | 70000.00 | 2019-09-18 |       4 |
+|    106 | Anjali   | Female | 48000.00 | 2022-11-25 |    NULL |
+|    107 | Ravi     | Male   | 40000.00 | 2024-01-05 |       2 |
+|    108 | Pooja    | Female | 65000.00 | 2021-12-12 |       5 |
+|    109 | Arjun    | Male   | 52000.00 | 2023-04-08 |    NULL |
+|    110 | Deepika  | Female | 58000.00 | 2022-06-14 |       3 |
++--------+----------+--------+----------+------------+---------+
+10 rows in set (0.00 sec)
+
+mysql> CREATE TABLE projects ( project_id INT PRIMARY KEY, project_name VARCHAR(100), start_date DATE, emp_id INT );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO projects VALUES (201,'Hospital Management System','2024-01-10',101), (202,'E-Commerce Website','2024-02-15',102), (203,'Payroll System','2024-03-20',104), (204,'Inventory Management','2024-04-12',105), (205,'AI Chatbot','2024-05-01',107), (206,'Banking Portal','2024-06-10',110), (207,'School ERP','2024-07-05',NULL), (208,'CRM Application','2024-08-08',108);
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> select *from projects;
++------------+----------------------------+------------+--------+
+| project_id | project_name               | start_date | emp_id |
++------------+----------------------------+------------+--------+
+|        201 | Hospital Management System | 2024-01-10 |    101 |
+|        202 | E-Commerce Website         | 2024-02-15 |    102 |
+|        203 | Payroll System             | 2024-03-20 |    104 |
+|        204 | Inventory Management       | 2024-04-12 |    105 |
+|        205 | AI Chatbot                 | 2024-05-01 |    107 |
+|        206 | Banking Portal             | 2024-06-10 |    110 |
+|        207 | School ERP                 | 2024-07-05 |   NULL |
+|        208 | CRM Application            | 2024-08-08 |    108 |
++------------+----------------------------+------------+--------+
+8 rows in set (0.00 sec)
+
+mysql> CREATE TABLE clients ( client_id INT PRIMARY KEY, client_name VARCHAR(100), country VARCHAR(50), project_id INT );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO clients VALUES (1,'ABC Technologies','India',201), (2,'Global Soft','USA',202), (3,'NextGen Solutions','Canada',203), (4,'Smart Systems','UK',204), (5,'Tech Innovators','Australia',205), (6,'Future Corp','Germany',208), (7,'Digital World','India',NULL);
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select *from clients;
++-----------+-------------------+-----------+------------+
+| client_id | client_name       | country   | project_id |
++-----------+-------------------+-----------+------------+
+|         1 | ABC Technologies  | India     |        201 |
+|         2 | Global Soft       | USA       |        202 |
+|         3 | NextGen Solutions | Canada    |        203 |
+|         4 | Smart Systems     | UK        |        204 |
+|         5 | Tech Innovators   | Australia |        205 |
+|         6 | Future Corp       | Germany   |        208 |
+|         7 | Digital World     | India     |       NULL |
++-----------+-------------------+-----------+------------+
+7 rows in set (0.00 sec)
+
+mysql> ^C
+mysql> CREATE TABLE departments ( dept_id INT PRIMARY KEY, dept_name VARCHAR(50), location VARCHAR(50) );
+ERROR 1050 (42S01): Table 'departments' already exists
+mysql> INSERT INTO departments VALUES (1,'HR','Hyderabad'), (2,'IT','Bangalore'), (3,'Finance','Chennai'), (4,'Marketing','Mumbai'), (5,'Sales','Delhi');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE dept ( dept_id INT PRIMARY KEY, dept_name VARCHAR(50), location VARCHAR(50) );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO dept VALUES (1,'HR','Hyderabad'), (2,'IT','Bangalore'), (3,'Finance','Chennai'), (4,'Marketing','Mumbai'), (5,'Sales','Delhi');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select *from dept;
++---------+-----------+-----------+
+| dept_id | dept_name | location  |
++---------+-----------+-----------+
+|       1 | HR        | Hyderabad |
+|       2 | IT        | Bangalore |
+|       3 | Finance   | Chennai   |
+|       4 | Marketing | Mumbai    |
+|       5 | Sales     | Delhi     |
++---------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select dept.id,dept.location,employees.dept_id
+    -> from dept
+    -> inner join employees
+    -> on dept.dept_id = employees.dept_id;
+ERROR 1054 (42S22): Unknown column 'dept.id' in 'field list'
+mysql> select dept.dept_id,dept.location,employees.dept_id
+    -> from dept
+    -> inner join employees
+    -> on dept.dept_id = employees.dept_id;
++---------+-----------+---------+
+| dept_id | location  | dept_id |
++---------+-----------+---------+
+|       1 | Hyderabad |       1 |
+|       2 | Bangalore |       2 |
+|       2 | Bangalore |       2 |
+|       3 | Chennai   |       3 |
+|       4 | Mumbai    |       4 |
+|       2 | Bangalore |       2 |
+|       5 | Delhi     |       5 |
+|       3 | Chennai   |       3 |
++---------+-----------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select employees.emp_name,dept.dept_name
+    -> from dept
+    -> inner join employees
+    -> on dept.dept_id = employees.dept_id;
++----------+-----------+
+| emp_name | dept_name |
++----------+-----------+
+| Rahul    | HR        |
+| Priya    | IT        |
+| Amit     | IT        |
+| Sneha    | Finance   |
+| Kiran    | Marketing |
+| Ravi     | IT        |
+| Pooja    | Sales     |
+| Deepika  | Finance   |
++----------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select employees.emp_id,employees.emp_name,dept.location
+    -> from employees
+    -> inner join dept
+    -> on dept.dept_id = employee.dept_id;
+ERROR 1054 (42S22): Unknown column 'employee.dept_id' in 'on clause'
+mysql> select employees.emp_id,employees.emp_name,dept.location
+    ->     -> from employees
+    ->     -> inner join dept
+    ->     -> on dept.dept_id = employees.dept_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from employees
+    -> inner join dept
+    -> on dept.dept_id = employees.dept_id' at line 2
+mysql> select employees.emp_id,employees.emp_name,dept.location
+    -> from dept
+    -> inner join employees
+    -> on dept.dept_id = employees.dept_id;
++--------+----------+-----------+
+| emp_id | emp_name | location  |
++--------+----------+-----------+
+|    101 | Rahul    | Hyderabad |
+|    102 | Priya    | Bangalore |
+|    103 | Amit     | Bangalore |
+|    104 | Sneha    | Chennai   |
+|    105 | Kiran    | Mumbai    |
+|    107 | Ravi     | Bangalore |
+|    108 | Pooja    | Delhi     |
+|    110 | Deepika  | Chennai   |
++--------+----------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select employees.emp_name,dept.dept_name
+    -> from dept
+    -> inner join employees
+    -> ;
++----------+-----------+
+| emp_name | dept_name |
++----------+-----------+
+| Rahul    | Sales     |
+| Rahul    | Marketing |
+| Rahul    | Finance   |
+| Rahul    | IT        |
+| Rahul    | HR        |
+| Priya    | Sales     |
+| Priya    | Marketing |
+| Priya    | Finance   |
+| Priya    | IT        |
+| Priya    | HR        |
+| Amit     | Sales     |
+| Amit     | Marketing |
+| Amit     | Finance   |
+| Amit     | IT        |
+| Amit     | HR        |
+| Sneha    | Sales     |
+| Sneha    | Marketing |
+| Sneha    | Finance   |
+| Sneha    | IT        |
+| Sneha    | HR        |
+| Kiran    | Sales     |
+| Kiran    | Marketing |
+| Kiran    | Finance   |
+| Kiran    | IT        |
+| Kiran    | HR        |
+| Anjali   | Sales     |
+| Anjali   | Marketing |
+| Anjali   | Finance   |
+| Anjali   | IT        |
+| Anjali   | HR        |
+| Ravi     | Sales     |
+| Ravi     | Marketing |
+| Ravi     | Finance   |
+| Ravi     | IT        |
+| Ravi     | HR        |
+| Pooja    | Sales     |
+| Pooja    | Marketing |
+| Pooja    | Finance   |
+| Pooja    | IT        |
+| Pooja    | HR        |
+| Arjun    | Sales     |
+| Arjun    | Marketing |
+| Arjun    | Finance   |
+| Arjun    | IT        |
+| Arjun    | HR        |
+| Deepika  | Sales     |
+| Deepika  | Marketing |
+| Deepika  | Finance   |
+| Deepika  | IT        |
+| Deepika  | HR        |
++----------+-----------+
+50 rows in set (0.00 sec)
+
+mysql> select * from employees inner join dept on employees.dept_id = dept.dept_id where dept_name="IT";
++--------+----------+--------+----------+------------+---------+---------+-----------+-----------+
+| emp_id | emp_name | gender | salary   | hire_date  | dept_id | dept_id | dept_name | location  |
++--------+----------+--------+----------+------------+---------+---------+-----------+-----------+
+|    102 | Priya    | Female | 60000.00 | 2022-03-15 |       2 |       2 | IT        | Bangalore |
+|    103 | Amit     | Male   | 55000.00 | 2021-05-20 |       2 |       2 | IT        | Bangalore |
+|    107 | Ravi     | Male   | 40000.00 | 2024-01-05 |       2 |       2 | IT        | Bangalore |
++--------+----------+--------+----------+------------+---------+---------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select employees.emp_name,dept.dept_name,employees.salary
+    -> from dept
+    -> inner join employees
+    -> on dept.dept_id = employees.dept_id;
++----------+-----------+----------+
+| emp_name | dept_name | salary   |
++----------+-----------+----------+
+| Rahul    | HR        | 45000.00 |
+| Priya    | IT        | 60000.00 |
+| Amit     | IT        | 55000.00 |
+| Sneha    | Finance   | 50000.00 |
+| Kiran    | Marketing | 70000.00 |
+| Ravi     | IT        | 40000.00 |
+| Pooja    | Sales     | 65000.00 |
+| Deepika  | Finance   | 58000.00 |
++----------+-----------+----------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employees inner join departments on employees.dept_id = departments.dept_id where gender="female";
++--------+----------+--------+----------+------------+---------+---------+-----------+-----------+
+| emp_id | emp_name | gender | salary   | hire_date  | dept_id | dept_id | dept_name | location  |
++--------+----------+--------+----------+------------+---------+---------+-----------+-----------+
+|    102 | Priya    | Female | 60000.00 | 2022-03-15 |       2 |       2 | IT        | Bangalore |
+|    104 | Sneha    | Female | 50000.00 | 2020-08-11 |       3 |       3 | Finance   | Chennai   |
+|    108 | Pooja    | Female | 65000.00 | 2021-12-12 |       5 |       5 | Sales     | Delhi     |
+|    110 | Deepika  | Female | 58000.00 | 2022-06-14 |       3 |       3 | Finance   | Chennai   |
++--------+----------+--------+----------+------------+---------+---------+-----------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employees inner join departments on employees.dept_id = departments.dept_id where dept_name="finance";
++--------+----------+--------+----------+------------+---------+---------+-----------+----------+
+| emp_id | emp_name | gender | salary   | hire_date  | dept_id | dept_id | dept_name | location |
++--------+----------+--------+----------+------------+---------+---------+-----------+----------+
+|    104 | Sneha    | Female | 50000.00 | 2020-08-11 |       3 |       3 | Finance   | Chennai  |
+|    110 | Deepika  | Female | 58000.00 | 2022-06-14 |       3 |       3 | Finance   | Chennai  |
++--------+----------+--------+----------+------------+---------+---------+-----------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select *from employees inner join dept on employees.dept_id = dept.dept_id where salary>55000;
++--------+----------+--------+----------+------------+---------+---------+-----------+-----------+
+| emp_id | emp_name | gender | salary   | hire_date  | dept_id | dept_id | dept_name | location  |
++--------+----------+--------+----------+------------+---------+---------+-----------+-----------+
+|    102 | Priya    | Female | 60000.00 | 2022-03-15 |       2 |       2 | IT        | Bangalore |
+|    105 | Kiran    | Male   | 70000.00 | 2019-09-18 |       4 |       4 | Marketing | Mumbai    |
+|    108 | Pooja    | Female | 65000.00 | 2021-12-12 |       5 |       5 | Sales     | Delhi     |
+|    110 | Deepika  | Female | 58000.00 | 2022-06-14 |       3 |       3 | Finance   | Chennai   |
++--------+----------+--------+----------+------------+---------+---------+-----------+-----------+
+4 rows in set (0.00 sec)
+
+mysql>  select from employees.emp_name,dept.dept_name,employees.salary inner join dept on employees.dept_id = dept.dept_id where salary>55000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from employees.emp_name,dept.dept_name,employees.salary inner join dept on emplo' at line 1
+mysql>  select *from employees inner join dept on employees.dept_id = dept.dept_id where salary>55000;
++--------+----------+--------+----------+------------+---------+---------+-----------+-----------+
+| emp_id | emp_name | gender | salary   | hire_date  | dept_id | dept_id | dept_name | location  |
++--------+----------+--------+----------+------------+---------+---------+-----------+-----------+
+|    102 | Priya    | Female | 60000.00 | 2022-03-15 |       2 |       2 | IT        | Bangalore |
+|    105 | Kiran    | Male   | 70000.00 | 2019-09-18 |       4 |       4 | Marketing | Mumbai    |
+|    108 | Pooja    | Female | 65000.00 | 2021-12-12 |       5 |       5 | Sales     | Delhi     |
+|    110 | Deepika  | Female | 58000.00 | 2022-06-14 |       3 |       3 | Finance   | Chennai   |
++--------+----------+--------+----------+------------+---------+---------+-----------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select *from employees inner join dept on employees.dept_id = dept.dept_id  where joining_date>'2025-01-01';
+ERROR 1054 (42S22): Unknown column 'joining_date' in 'where clause'
+mysql>
+mysql> select *from employees inner join dept on employees.dept_id = dept.dept_id  where hire_date>'2022-01-01';
++--------+----------+--------+----------+------------+---------+---------+-----------+-----------+
+| emp_id | emp_name | gender | salary   | hire_date  | dept_id | dept_id | dept_name | location  |
++--------+----------+--------+----------+------------+---------+---------+-----------+-----------+
+|    101 | Rahul    | Male   | 45000.00 | 2023-01-10 |       1 |       1 | HR        | Hyderabad |
+|    102 | Priya    | Female | 60000.00 | 2022-03-15 |       2 |       2 | IT        | Bangalore |
+|    107 | Ravi     | Male   | 40000.00 | 2024-01-05 |       2 |       2 | IT        | Bangalore |
+|    110 | Deepika  | Female | 58000.00 | 2022-06-14 |       3 |       3 | Finance   | Chennai   |
++--------+----------+--------+----------+------------+---------+---------+-----------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select employees.emp_name,dept.location
+    -> from dept
+    -> inner join employees
+    -> order by employees.emp_name;
++----------+-----------+
+| emp_name | location  |
++----------+-----------+
+| Amit     | Chennai   |
+| Amit     | Delhi     |
+| Amit     | Mumbai    |
+| Amit     | Bangalore |
+| Amit     | Hyderabad |
+| Anjali   | Hyderabad |
+| Anjali   | Bangalore |
+| Anjali   | Chennai   |
+| Anjali   | Mumbai    |
+| Anjali   | Delhi     |
+| Arjun    | Bangalore |
+| Arjun    | Delhi     |
+| Arjun    | Mumbai    |
+| Arjun    | Chennai   |
+| Arjun    | Hyderabad |
+| Deepika  | Hyderabad |
+| Deepika  | Delhi     |
+| Deepika  | Mumbai    |
+| Deepika  | Chennai   |
+| Deepika  | Bangalore |
+| Kiran    | Mumbai    |
+| Kiran    | Chennai   |
+| Kiran    | Bangalore |
+| Kiran    | Hyderabad |
+| Kiran    | Delhi     |
+| Pooja    | Hyderabad |
+| Pooja    | Bangalore |
+| Pooja    | Mumbai    |
+| Pooja    | Delhi     |
+| Pooja    | Chennai   |
+| Priya    | Mumbai    |
+| Priya    | Delhi     |
+| Priya    | Chennai   |
+| Priya    | Bangalore |
+| Priya    | Hyderabad |
+| Rahul    | Delhi     |
+| Rahul    | Hyderabad |
+| Rahul    | Bangalore |
+| Rahul    | Chennai   |
+| Rahul    | Mumbai    |
+| Ravi     | Mumbai    |
+| Ravi     | Delhi     |
+| Ravi     | Chennai   |
+| Ravi     | Bangalore |
+| Ravi     | Hyderabad |
+| Sneha    | Bangalore |
+| Sneha    | Chennai   |
+| Sneha    | Mumbai    |
+| Sneha    | Delhi     |
+| Sneha    | Hyderabad |
++----------+-----------+
+50 rows in set (0.00 sec)
+
+mysql> select employees.emp_id,dept.location
+    -> from dept
+    -> inner join employees
+    -> where dept.dept_id = employees.dept_id order by employees.emp_name;
++--------+-----------+
+| emp_id | location  |
++--------+-----------+
+|    103 | Bangalore |
+|    110 | Chennai   |
+|    105 | Mumbai    |
+|    108 | Delhi     |
+|    102 | Bangalore |
+|    101 | Hyderabad |
+|    107 | Bangalore |
+|    104 | Chennai   |
++--------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select employees.emp_id,employees.emp_name,dept.location
+    -> from dept
+    -> inner join employees
+    -> where dept.dept_id = employees.dept_id order by employees.emp_name;
++--------+----------+-----------+
+| emp_id | emp_name | location  |
++--------+----------+-----------+
+|    103 | Amit     | Bangalore |
+|    110 | Deepika  | Chennai   |
+|    105 | Kiran    | Mumbai    |
+|    108 | Pooja    | Delhi     |
+|    102 | Priya    | Bangalore |
+|    101 | Rahul    | Hyderabad |
+|    107 | Ravi     | Bangalore |
+|    104 | Sneha    | Chennai   |
++--------+----------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select employees.emp_name,dept.dept_name,dept.location
+    -> from dept
+    -> inner join employees
+    -> where dept.dept_id = employees.dept_id;
++----------+-----------+-----------+
+| emp_name | dept_name | location  |
++----------+-----------+-----------+
+| Rahul    | HR        | Hyderabad |
+| Priya    | IT        | Bangalore |
+| Amit     | IT        | Bangalore |
+| Sneha    | Finance   | Chennai   |
+| Kiran    | Marketing | Mumbai    |
+| Ravi     | IT        | Bangalore |
+| Pooja    | Sales     | Delhi     |
+| Deepika  | Finance   | Chennai   |
++----------+-----------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select employees.emp_name,dept.dept_name
+    -> from dept
+    -> left join employees
+    -> where dept.dept_id = employees.dept_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where dept.dept_id = employees.dept_id' at line 4
+mysql>
+mysql>
+mysql> select employees.emp_name,dept.dept_name
+    -> from dept
+    -> left join employees
+    -> on dept.dept_id = employees.dept_id;
++----------+-----------+
+| emp_name | dept_name |
++----------+-----------+
+| Rahul    | HR        |
+| Ravi     | IT        |
+| Amit     | IT        |
+| Priya    | IT        |
+| Deepika  | Finance   |
+| Sneha    | Finance   |
+| Kiran    | Marketing |
+| Pooja    | Sales     |
++----------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select employees.emp_name,dept.dept_name
+    -> from dept
+    -> left join employees
+    -> on dept.dept_id = employees.dept_id where dept.dept_id=null
+    -> ;
+Empty set (0.01 sec)
+
+mysql> select employees.emp_name,dept.dept_name
+    -> from dept
+    -> left join employees
+    -> on dept.dept_id = employees.dept_id;
++----------+-----------+
+| emp_name | dept_name |
++----------+-----------+
+| Rahul    | HR        |
+| Ravi     | IT        |
+| Amit     | IT        |
+| Priya    | IT        |
+| Deepika  | Finance   |
+| Sneha    | Finance   |
+| Kiran    | Marketing |
+| Pooja    | Sales     |
++----------+-----------+
+8 rows in set (0.00 sec)
